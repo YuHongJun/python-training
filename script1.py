@@ -130,14 +130,32 @@
 #共需操作7次 操作过程为
 # ['A1-->C1first', 'A2-->B2seco', 'C1-->B1first', 'A3-->C3seco', 'B1-->A1first', 'B2-->C2seco', 'A1-->C1first']
 
+#
+# L1 = ['Hello', 'World', 18, 'Apple', None]
+# L2 = [s.lower() for s in L1 if isinstance(s,str)==True]
+# L3 = [s.lower() if isinstance(s,str) else s for s in L1]
+# L4 = [s.upper() if isinstance(s,str) is True else s for s in L1]
+# L5 = [s[:1].upper()+s[1:].lower() if isinstance(s,str) else s for s in L1]
+# print('L1:',L1)
+# print('L2:',L2)
+# print('L3:',L3)
+# print('L4:',L4)
+# print('L5:',L5)
 
-L1 = ['Hello', 'World', 18, 'Apple', None]
-L2 = [s.lower() for s in L1 if isinstance(s,str)==True]
-L3 = [s.lower() if isinstance(s,str) else s for s in L1]
-L4 = [s.upper() if isinstance(s,str) is True else s for s in L1]
-L5 = [s[:1].upper()+s[1:].lower() if isinstance(s,str) else s for s in L1]
-print('L1:',L1)
-print('L2:',L2)
-print('L3:',L3)
-print('L4:',L4)
-print('L5:',L5)
+# class Solution(object):
+#     def removeDuplicates(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+#         if not nums:
+#             return 0
+#
+#         newTail = 0
+#
+#         for i in range(1, len(nums)):
+#             if nums[i] != nums[newTail]:
+#                 newTail += 1
+#                 nums[newTail] = nums[i]
+#
+#         return newTail + 1
