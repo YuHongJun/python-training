@@ -159,3 +159,28 @@
 #                 nums[newTail] = nums[i]
 #
 #         return newTail + 1
+
+#35. Search Insert Position
+def searchInsert( nums, target):
+    if (len(nums) == 0):
+        return 0
+
+    start = 0
+    end = len(nums) - 1
+    while (start + 1 < end):
+        mid = start + (end - start) // 2
+        if (nums[mid] == target):
+            return mid
+        elif (nums[mid] < target):
+            start = mid
+        else:
+            end = mid
+
+    if target <= nums[start]:
+        return start
+    elif target <= nums[end]:
+        return end
+    else:
+        return end + 1
+
+print(searchInsert([1,3,5,6],4))
