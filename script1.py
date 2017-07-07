@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # A first Python script
 
@@ -34,13 +34,13 @@
 # else:
 #     print('严重肥胖')
 
-#range(101)就可以生成0-100的整数序列，计算如下
+# range(101)就可以生成0-100的整数序列，计算如下
 # sum = 0
 # for x in range(101):
 #     sum = sum + x
 # print(sum)
 
-#第二种循环是while循环，只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：
+# 第二种循环是while循环，只要条件满足，就不断循环，条件不满足时退出循环。比如我们要计算100以内所有奇数之和，可以用while循环实现：
 # sum = 0
 # n = 99
 # while n > 0:
@@ -112,7 +112,7 @@
 #
 # hanoi(3,'A','B','C')
 
-#汉诺塔 http://baike.baidu.com/item/%E6%B1%89%E8%AF%BA%E5%A1%94/3468295
+# 汉诺塔 http://baike.baidu.com/item/%E6%B1%89%E8%AF%BA%E5%A1%94/3468295
 
 # B=[]
 # def move(n,a,b,c):
@@ -127,7 +127,7 @@
 #         move(n-1,b,a,c)
 # move(3,'A','B','C')
 # print('共需操作'+str(len(B))+'次','操作过程为',B)
-#共需操作7次 操作过程为
+# 共需操作7次 操作过程为
 # ['A1-->C1first', 'A2-->B2seco', 'C1-->B1first', 'A3-->C3seco', 'B1-->A1first', 'B2-->C2seco', 'A1-->C1first']
 
 #
@@ -160,27 +160,110 @@
 #
 #         return newTail + 1
 
-#35. Search Insert Position
-def searchInsert( nums, target):
-    if (len(nums) == 0):
-        return 0
+# 35. Search Insert Position
+# def searchInsert( nums, target):
+#     if (len(nums) == 0):
+#         return 0
+#
+#     start = 0
+#     end = len(nums) - 1
+#     while (start + 1 < end):
+#         mid = start + (end - start) // 2
+#         if (nums[mid] == target):
+#             return mid
+#         elif (nums[mid] < target):
+#             start = mid
+#         else:
+#             end = mid
+#
+#     if target <= nums[start]:
+#         return start
+#     elif target <= nums[end]:
+#         return end
+#     else:
+#         return end + 1
+#
+# print(searchInsert([1,3,5,6],4))
 
-    start = 0
-    end = len(nums) - 1
-    while (start + 1 < end):
-        mid = start + (end - start) // 2
-        if (nums[mid] == target):
-            return mid
-        elif (nums[mid] < target):
-            start = mid
+# from PIL import Image
+# im = Image.open('test1.jpg')
+# print(im.format, im.size, im.mode)
+# im.thumbnail((540,405))
+# im.save('test22.jpg','JPEG')
+# import sys
+# sys.path
+
+# class Student(object):
+#
+#     @property
+#     def birth(self):
+#         return self._birth
+#
+#     @birth.setter
+#     def birth(self, value):
+#         self._birth = value
+#
+#     @property
+#     def age(self):
+#         return 2015 - self._birth
+#
+#
+#
+# s=Student()
+# s.birth=2000
+# print(s.birth)
+# print(s.age)
+
+# class Solution(object):
+#     def findDisappearedNumbers(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: List[int]
+#         """
+#         # For each number i in nums,
+#         # we mark the number that i points as negative.
+#         # Then we filter the list, get all the indexes
+#         # who points to a positive number
+#         for i in xrange(len(nums)):
+#             index = abs(nums[i]) - 1
+#             nums[index] = - abs(nums[index])
+#
+#         return [i + 1 for i in range(len(nums)) if nums[i] > 0]
+#
+#     __repr__=findDisappearedNumbers
+#
+
+class Chain(object):
+    def __init__(self, path=''):
+        self._path = path
+
+    # def __getattr__(self, path):
+    #     return Chain('%s/%s' % (self._path, path))
+
+    def __getattr__(self, path):
+        if path in ['users', 'group']:
+            return Chain('%s' % self._path)
         else:
-            end = mid
+            return Chain('%s/%s' % (self._path, path))
 
-    if target <= nums[start]:
-        return start
-    elif target <= nums[end]:
-        return end
-    else:
-        return end + 1
+    def __call__(self, path):
+        return Chain('%s/%s' % (self._path, path))
 
-print(searchInsert([1,3,5,6],4))
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+
+
+# print(Chain().status.user.timeline.list)
+print(Chain().users('michael').group('student').repos)
+# /status/user/timeline/list
+# /users/michael/group/student/repos
+# /michael/student/repos
+
+# 调用时，需要把:user替换为实际用户名。如果我们能写出这样的链式调用：
+# In：
+# Chain().users('Michael').group('student').repos
+#
+# Out：
+# GET/Michael/student/repos
