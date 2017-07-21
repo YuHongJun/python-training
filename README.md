@@ -53,8 +53,8 @@ mysql> show variables like '%char%';
 
 mysql -u root -p
 
-mysql> CREATE USER "test"@"localhost” IDENTIFIED BY "password"; #本地登录
-mysql> CREATE USER "test"@"%" IDENTIFIED BY "password"; #远程登录
+mysql> CREATE USER "www-data"@"localhost" IDENTIFIED BY "www-data"; #本地登录
+mysql> CREATE USER "www-data"@"%" IDENTIFIED BY "www-data"; #远程登录
 mysql> quit
 
 mysql -u test -p #测试是否创建成功
@@ -72,7 +72,7 @@ create database testDB default charset utf8 collate utf8_general_ci;
 ```
 3. 授权test用户拥有testDB数据库的所有权限：
 
-授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;　
+授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;密码可为空
 ```
 grant all privileges on testDB.* to "test"@"localhost" identified by "password";
 flush privileges; #刷新系统权限表
@@ -86,7 +86,7 @@ flush privileges; #刷新系统权限表
 5. 删除用户
 ```
 drop user 用户名@'%';
-drop user 用户名@ localhost;
+drop user 'www-data'@'localhost';
 ```
 6. 修改指定用户密码
 ```
