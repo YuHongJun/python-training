@@ -5,6 +5,6 @@ __author__ = 'Demi Yu'
 
 from kafka import KafkaConsumer
 
-consumer = KafkaConsumer('sex')
+consumer = KafkaConsumer('result')
 for msg in consumer:
     print((msg.value).decode('utf8'))
