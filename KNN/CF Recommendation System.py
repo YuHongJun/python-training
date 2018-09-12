@@ -54,7 +54,7 @@ def dataSet2Matrix(filename):
     start_time = time.clock()
 
     df_weight = [0.5,3,5,4,4.5,3.5,3.5,3,3,3.5,2,2,1,4]
-    reader = pd.read_csv(filename, iterator=True, header=0, usecols=headerNamesFilter, nrows=340)
+    reader = pd.read_csv(filename, iterator=True, header=0, usecols=headerNamesFilter, nrows=2648)
 #     reader = pd.read_csv(local_data, iterator=True, header=0, usecols=headerNamesFilter, names=headerNames, nrows=1000)
 
     loop = True
@@ -91,7 +91,12 @@ def dataSet2Matrix(filename):
         'restaurant_id': df_restaurant_id,
     })
     userItemData['ratings'] = df.apply(lambda x: x.sum(), axis=1)
+    # userList = list(set(userItemData['user_id']))
     print(userItemData.shape)
+    # print(userList)
+    # print(len(userList))
+    # print(userList[49])
+
     userItemData.to_csv("new_trans_data.csv", encoding = "utf-8", index=False)
     end_time = time.clock()
     time_spent = end_time - start_time
@@ -252,11 +257,11 @@ def sortRMSE():
     sortDict = sorted(RMSEDict.items(),key=lambda x:x[1])
     print(sortDict)
     return sortDict
-# sortRMSE()
+sortRMSE()
 
-if __name__ == '__main__':
-    readTransData(trans_data)
-    runMain(M, 8, productLength)
+# if __name__ == '__main__':
+    # readTransData(trans_data)
+    # runMain(M, 8, productLength)
 
     # sortRMSE()
     # runMain(M, k, productLength)
